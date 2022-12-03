@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.com/jcpinheiro/freteapi.svg?branch=master)](https://travis-ci.com/jcpinheiro/freteapi)
-
 # API REST do Sistema de Controle de Estoque - versão 2
 
 ### Reference Documentation - Nova versão
