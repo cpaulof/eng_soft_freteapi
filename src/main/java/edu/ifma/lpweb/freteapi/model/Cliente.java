@@ -27,4 +27,13 @@ public class Cliente {
 	@NotEmpty(message = "Campo telefone e obrigatorio")
 	@Length(min = 8, message = "Deve possuir {min} dígitos no mínimo")
 	private String telefone;
+
+	public Cliente() {
+	}
+
+	public Cliente(String nome, String endereco, String telefone) {
+		this.nome = nome;
+		this.endereco = endereco;
+		this.telefone = telefone;
+	}
 }

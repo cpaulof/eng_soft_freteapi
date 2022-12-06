@@ -32,12 +32,20 @@ public class Frete {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Cidade cidade;
 
+	public Frete() {
+	}
+
 	public Frete(String descricao, Float peso, BigDecimal valor, Cliente cliente, Cidade cidade) {
 		this.descricao = descricao;
 		this.peso = peso;
 		this.valor = valor;
 		this.cliente = cliente;
 		this.cidade = cidade;
+	}
+
+	public Frete(int id, String descricao, Float peso, BigDecimal valor, Cliente cliente, Cidade cidade) {
+		this(descricao, peso, valor, cliente, cidade);
+		this.id = id;
 	}
 
 	public BigDecimal calcularFrete() {

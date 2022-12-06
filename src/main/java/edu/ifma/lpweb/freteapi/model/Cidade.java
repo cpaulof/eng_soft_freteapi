@@ -29,4 +29,13 @@ public class Cidade {
 	@Min(value = 1, message = "Campo taxa nao e valido")
 	private BigDecimal taxa;
 
+	public Cidade() {
+	}
+
+	public Cidade(String nome, String uf, BigDecimal taxa) {
+		this.nome = nome;
+		this.uf = uf;
+		this.taxa = taxa;
+	}
+
 }
