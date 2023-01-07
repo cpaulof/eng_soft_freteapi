@@ -19,7 +19,7 @@ import edu.ifma.lpweb.freteapi.model.Frete;
 import edu.ifma.lpweb.freteapi.repository.FreteRepository;
 
 @SpringBootTest (webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class FreteControllerTest {
+public class FreteControllerIT {
     
     @Autowired
 	private TestRestTemplate testRestTemplate;
