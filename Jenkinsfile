@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvnw -B -DskipTests clean package'
+                bat 'mvnw -B -DskipTests clean package'
             }
         }
         stage('Test') {
             steps {
-                sh 'mvnw test'
+                bat 'mvnw test'
             }
             post {
                 always {
@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh 'echo "Oi"'
+                bat 'echo "Oi"'
             }
         }
     }
