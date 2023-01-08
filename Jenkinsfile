@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Inicialização DEV') {
             steps {
-                bat 'for %i in (target\\*.war) do java -jar "%i" --server.port=8081'
+                bat "java -jar target\\freteapi-0.0.1-SNAPSHOT.war --server.port=8081"
                 bat 'echo "selenium tests com python"'
             }
         }
