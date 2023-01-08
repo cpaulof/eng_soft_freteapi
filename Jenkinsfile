@@ -1,25 +1,25 @@
-pipeline{
+pipeline {
     agent any
-
-    stages{
-        stage("Preparar"){
-            git url: "https://github.com/cpaulof/eng_soft_freteapi.git"
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvnw -B -DskipTests clean package'
+            }
         }
-
-        stage('Artifactory configuration') {
-            // Tool name from Jenkins configuration
-            rtMaven.tool = "Maven-3.3.9"
-            // Set Artifactory repositories for dependencies resolution and artifacts deployment.
-            rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
-            rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
+        stage('Test') {
+            steps {
+                sh 'mvnw test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
         }
-
-        stage('Maven build') {
-            buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean install'
-        }
-
-        stage('Publish build info') {
-            server.publishBuildInfo buildInfo
+        stage('Deliver') {
+            steps {
+                sh 'echo "Oi"'
+            }
         }
     }
 }
