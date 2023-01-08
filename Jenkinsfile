@@ -6,7 +6,7 @@ pipeline {
                 bat 'mvnw -B -DskipTests clean package'
             }
         }
-        stage('Test') {
+        stage('Testes Unitários') {
             steps {
                 bat 'mvnw test'
             }
@@ -16,9 +16,21 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') {
+
+        stage("Teste de Integração"){
+            steps{
+                bat 'mvnw verify -Pfailsafe'
+            }
+            post {
+                always {
+                    junit 'target/failsafe-reports/*.xml'
+                }
+            }
+        }
+        stage('Inicialização DEV') {
             steps {
-                bat 'echo "Oi"'
+                bat 'for %i in (target\*.war) do java -jar "%~i" --server.port=8081'
+                bat 'echo "selenium tests com python"'
             }
         }
     }
