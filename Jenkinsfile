@@ -18,12 +18,6 @@ pipeline {
         }
 
         stage("Teste de Integracao"){
-            when{
-                anyOf{
-                    branch 'main'
-                    branch 'dev'
-                }
-            }
             steps{
                 bat 'mvnw verify -Pfailsafe'
             }
