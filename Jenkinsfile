@@ -42,7 +42,7 @@ pipeline {
             steps{
                 echo "entrega para dev"
                 // startar uma intancia da build.
-                bat "java -jar target\\freteapi-0.0.1-SNAPSHOT.war --server.port=8081" //local
+                // bat "java -jar target\\freteapi-0.0.1-SNAPSHOT.war --server.port=8081" //local
             }
         }
 
