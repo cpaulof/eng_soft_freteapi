@@ -32,7 +32,7 @@ pipeline {
                     junit 'target/failsafe-reports/*.xml'
                 }
             }
-        // }
+        }
         // stage('Inicializacao DEV') {
         //     steps {
         //         bat "java -jar target\\freteapi-0.0.1-SNAPSHOT.war --server.port=8081"
@@ -58,13 +58,8 @@ pipeline {
             steps{
                 echo "entrega na producao"
                 // upload para servidor de producao e execucao.
+                archiveArtifacts artifacts: 'target/*.war', fingerprint: true
             }
-        }
-    }
-    post {
-        
-        always {
-            archiveArtifacts artifacts: 'target/*.war', fingerprint: true
         }
     }
 }
