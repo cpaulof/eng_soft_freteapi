@@ -18,6 +18,12 @@ pipeline {
         }
 
         stage("Teste de Integracao"){
+            when{
+                anyOf{
+                    branch 'main'
+                    branch 'dev'
+                }
+            }
             steps{
                 bat 'mvnw verify -Pfailsafe'
             }
@@ -26,15 +32,37 @@ pipeline {
                     junit 'target/failsafe-reports/*.xml'
                 }
             }
-        }
+        // }
         // stage('Inicializacao DEV') {
         //     steps {
         //         bat "java -jar target\\freteapi-0.0.1-SNAPSHOT.war --server.port=8081"
         //         bat 'echo "selenium tests com python"'
         //     }
         // } 
+
+        stage('deploy dev') {
+            when{
+                branch 'dev'
+            }
+            steps{
+                echo "entrega para dev"
+                // startar uma intancia da build.
+                bat "java -jar target\\freteapi-0.0.1-SNAPSHOT.war --server.port=8081" //local
+            }
+        }
+
+        stage('deploy prod') {
+            when{
+                branch 'main'
+            }
+            steps{
+                echo "entrega na producao"
+                // upload para servidor de producao e execucao.
+            }
+        }
     }
     post {
+        
         always {
             archiveArtifacts artifacts: 'target/*.war', fingerprint: true
         }
