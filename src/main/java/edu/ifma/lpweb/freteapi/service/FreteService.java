@@ -8,6 +8,7 @@ import edu.ifma.lpweb.freteapi.repository.FreteRepository;
 import edu.ifma.lpweb.freteapi.repository.filter.FreteFiltro;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -54,5 +55,9 @@ public class FreteService {
     public Cidade obterCidadeComMaisFretes(){
         Cidade cidade = freteRepository.cidadeComMaisFrentes(PageRequest.of(0, 1)).get(0);
         return cidade;
+    }
+
+    public Optional<Frete> buscaPorId(Integer id){
+        return freteRepository.findById(id);
     }
 }
