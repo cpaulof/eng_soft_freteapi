@@ -1,6 +1,7 @@
 package edu.ifma.lpweb.freteapi.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,19 +46,17 @@ public class FreteControllerIT {
 		assertEquals(HttpStatus.OK, resposta.getStatusCode());
 	}
 
-	// @Test
-	// public void deveBuscarPorId() {
-		
-	// 	Map<String, String> urlVars = new HashMap<>();
-	// 	urlVars.put("cliente_id", "2");
-	// 	ResponseEntity<String> frete = testRestTemplate.getForEntity("/fretes/", String.class, urlVars);
+	@Test
+	public void deveBuscarPorId() {
+		ResponseEntity<Frete> frete = testRestTemplate.getForEntity("/fretes/3", Frete.class);
 
-	// 	// ResponseEntity<String> resposta =
-	// 	// 		testRestTemplate.exchange("/fretes/",HttpMethod.GET,
-	// 	// 				                   null, String.class, urlVars);
-	// 	System.out.println("\n\n-----------------\n"+frete.getBody());
-	// 	//assertEquals(HttpStatus.OK, resposta.getStatusCode());
-	// }
+		String name = "Produtos de Limpeza";
+
+		assertEquals(HttpStatus.OK, frete.getStatusCode());
+		Frete resultado = frete.getBody();
+		assertNotNull(resultado);
+		assertEquals(name, resultado.getDescricao());
+	}
     
 
 }
