@@ -6,7 +6,7 @@ pipeline {
                 bat 'mvnw -B -DskipTests clean package'
             }
         }
-        stage('Testes Unitários') {
+        stage('Testes Unitarios') {
             steps {
                 bat 'mvnw test'
             }
@@ -17,7 +17,7 @@ pipeline {
             }
         }
 
-        stage("Teste de Integração"){
+        stage("Teste de Integracao"){
             steps{
                 bat 'mvnw verify -Pfailsafe'
             }
@@ -27,11 +27,16 @@ pipeline {
                 }
             }
         }
-        stage('Inicialização DEV') {
-            steps {
-                bat "java -jar target\\freteapi-0.0.1-SNAPSHOT.war --server.port=8081"
-                bat 'echo "selenium tests com python"'
-            }
+        // stage('Inicializacao DEV') {
+        //     steps {
+        //         bat "java -jar target\\freteapi-0.0.1-SNAPSHOT.war --server.port=8081"
+        //         bat 'echo "selenium tests com python"'
+        //     }
+        // } 
+    }
+    post {
+        always {
+            archiveArtifacts artifacts: 'target/*.war', fingerprint: true
         }
     }
 }

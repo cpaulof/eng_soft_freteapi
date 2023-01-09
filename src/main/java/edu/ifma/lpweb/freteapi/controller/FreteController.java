@@ -38,16 +38,14 @@ public class FreteController {
 
     }
 
-    // @GetMapping("/{id}")
-    // public ResponseEntity<Frete> buscaPor(@PathVariable Integer id) {
-    //     Optional<Cidade> optional = cidadeService.buscaPor(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Frete> buscaPor(@PathVariable Integer id) {
+        Optional<Frete> optional = freteService.buscaPorId(id);
 
-    //     if (optional.isPresent()) {
-    //         return ResponseEntity.ok(optional.get());
-    //     } else {
-    //         return ResponseEntity.notFound().build();
-    //     }
-    // }
-
-
+        if (optional.isPresent()) {
+            return ResponseEntity.ok(optional.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
