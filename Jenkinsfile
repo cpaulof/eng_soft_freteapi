@@ -18,6 +18,7 @@ pipeline {
         }
 
         stage("Teste de Integracao"){
+            
             steps{
                 bat 'mvnw verify -Pfailsafe'
             }
@@ -52,13 +53,8 @@ pipeline {
             steps{
                 echo "entrega na producao"
                 // upload para servidor de producao e execucao.
+                archiveArtifacts artifacts: 'target/*.war', fingerprint: true
             }
-        }
-    }
-    post {
-        
-        always {
-            archiveArtifacts artifacts: 'target/*.war', fingerprint: true
         }
     }
 }
